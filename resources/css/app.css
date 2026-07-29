@@ -1,0 +1,190 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans:
+        "Poppins",
+        ui-sans-serif,
+        system-ui,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+
+/* ===========================
+   SWEET CAKE BAKERY
+=========================== */
+
+body{
+    background-color:#fff8f4;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Navbar */
+
+.navbar{
+    background:linear-gradient(90deg,#ffb6c1,#ffc8dd)!important;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.navbar-brand{
+    color:white!important;
+    font-weight:bold;
+    font-size:24px;
+}
+
+.nav-link{
+    color:white!important;
+    font-weight:500;
+    transition:0.3s;
+}
+
+.nav-link:hover{
+    color:#6b4226!important;
+}
+
+/* Banner */
+
+.banner{
+    background:linear-gradient(135deg,#ffd6e0,#fff3e6);
+    border-radius:20px;
+    padding:40px;
+}
+
+/* Card */
+
+.card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.card-img-top{
+    height:230px;
+    object-fit:cover;
+    transition:0.3s;
+}
+
+.card:hover .card-img-top{
+    transform:scale(1.05);
+}
+
+.card-title{
+    font-weight:bold;
+}
+
+/* Tombol */
+
+.btn{
+    border-radius:30px;
+}
+
+.btn-success{
+    background:#ff7aa2;
+    border:none;
+}
+
+.btn-success:hover{
+    background:#ff5d8c;
+}
+
+.btn-danger{
+    border:none;
+}
+
+.btn-warning{
+    color:white;
+}
+
+.btn-info{
+    color:white;
+}
+
+/* Badge */
+
+.badge{
+    padding:10px 15px;
+    font-size:14px;
+}
+
+/* Table */
+
+.table{
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.table thead{
+    background:#ffc8dd;
+}
+
+/* Search */
+
+.input-group input{
+    border-radius:30px 0 0 30px;
+}
+
+.input-group button{
+    border-radius:0 30px 30px 0;
+}
+
+/* Alert */
+
+.alert{
+    border-radius:15px;
+}
+
+/* Pagination */
+
+.pagination{
+    justify-content:center;
+}
+
+.page-link{
+    color:#ff5d8c;
+}
+
+.page-item.active .page-link{
+    background:#ff7aa2;
+    border-color:#ff7aa2;
+}
+
+/* Footer */
+
+footer{
+    margin-top:50px;
+    text-align:center;
+    color:#777;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+    .navbar-brand{
+        font-size:20px;
+    }
+
+    .banner{
+        padding:25px;
+    }
+
+    .card-img-top{
+        height:200px;
+    }
+
+}
