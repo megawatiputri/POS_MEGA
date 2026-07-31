@@ -43,16 +43,18 @@ class PenjualanController extends Controller
      */
     public function create(SearchRequest $request)
     {
-        $sale = Penjualan::firstOrCreate(
-            [
+        $sale = Penjualan::where('user_id', Auth::id())
+                ->where('status', 'OPEN')
+                ->first();
+
+        if (!$sale) {
+            $sale = Penjualan::create([
                 'user_id' => Auth::id(),
-                'status' => 'OPEN'
-            ],
-            [
+                'status' => 'OPEN',
                 'total_pembayaran' => 0,
-                'metode_pembayaran' => 'CASH'
-            ]
-        );
+                'metode_pembayaran' => 'CASH',
+            ]);
+        }
 
         $keyword = $request->input('search');
 
