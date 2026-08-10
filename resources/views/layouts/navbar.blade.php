@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold text-white" href="{{ route('dashboard') }}">
+        <a class="navbar-brand fw-bold text-white" href="{{ route('beranda') }}">
             🎂 Sweet Cake Bakery
         </a>
 
@@ -18,10 +18,18 @@
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Request::is('dashboard') ? 'fw-bold' : '' }}"
-                        href="{{ route('dashboard') }}">
+                    <a class="nav-link text-white {{ Request::is('beranda') ? 'fw-bold' : '' }}"
+                        href="{{ route('beranda') }}">
                         <i class="bi bi-house-fill"></i>
-                        Dashboard
+                        Beranda
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::is('admin/users') ? 'fw-bold' : '' }}"
+                        href="{{ route('admin.users') }}">
+                        <i class="bi bi-people-fill"></i>
+                        Pengguna
                     </a>
                 </li>
 
@@ -41,14 +49,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Request::is('admin/users') ? 'fw-bold' : '' }}"
-                        href="{{ route('admin.users') }}">
-                        <i class="bi bi-people-fill"></i>
-                        Users
-                    </a>
-                </li>
-
                 <li class="nav-item ms-3">
 
                     <form action="{{ route('logout') }}" method="POST">
@@ -56,7 +56,7 @@
 
                         <button class="btn btn-danger rounded-pill">
                             <i class="bi bi-box-arrow-right"></i>
-                            Logout
+                            Keluar
                         </button>
 
                     </form>

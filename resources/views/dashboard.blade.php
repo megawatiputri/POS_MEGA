@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Beranda')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <h1 class="fw-bold text-dark">🎂 Sweet Cake Bakery</h1>
 
                 <p class="fs-5 text-secondary">
-                    Selamat datang di Dashboard Penjualan Cake
+                    Selamat datang di Beranda Penjualan Cake
                 </p>
 
                 <small class="text-muted">
@@ -26,7 +26,7 @@
     @can('viewAny', App\Models\User::class)
 
     <h3 class="fw-bold mb-4">
-        📊 Ringkasan Penjualan Hari Ini
+         Ringkasan Penjualan Hari Ini
     </h3>
 
     <div class="row g-4">
@@ -68,7 +68,7 @@
     <br>
 
     <h3 class="fw-bold mb-4">
-        💳 Metode Pembayaran
+         Metode Pembayaran
     </h3>
 
     <div class="row g-4">
@@ -116,7 +116,7 @@
 ========================== -->
 
 <h3 class="fw-bold mb-4">
-    📦 Status Persediaan Produk
+     Status Persediaan Produk
 </h3>
 
 <div class="row">
@@ -127,7 +127,7 @@
         <div class="card shadow border-0 rounded-4 mb-4">
 
             <div class="card-header bg-warning text-dark fw-bold">
-                ⚠️ Produk Stok Rendah
+                 Produk Stok Rendah
             </div>
 
             <div class="card-body">
@@ -185,7 +185,7 @@
         <div class="card shadow border-0 rounded-4 mb-4">
 
             <div class="card-header bg-danger text-white fw-bold">
-                ❌ Produk Habis
+                 Produk Habis
             </div>
 
             <div class="card-body">
@@ -251,7 +251,7 @@
 ========================== -->
 
 <h3 class="fw-bold mb-3">
-    🏆 Produk Terlaris
+     Produk Terlaris
 </h3>
 
 <div class="card shadow border-0 rounded-4">

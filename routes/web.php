@@ -17,7 +17,7 @@ Route::middleware('guest')->group(function () {
 
 //route yang bisa diakses ketika user sudah login
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/beranda', [DashboardController::class, 'index'])->name('beranda');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
