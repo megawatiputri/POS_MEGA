@@ -37,10 +37,25 @@
 <div class="content">
 
     @if(session('success'))
-        <div class="alert alert-success shadow-sm">
-            {{ session('success') }}
-        </div>
-    @endif
+            <div id="success-alert" class="alert alert-success shadow-sm">
+                {{ session('success') }}
+            </div>
+
+            <script>
+                setTimeout(function () {
+                    const alert = document.getElementById('success-alert');
+
+                    if (alert) {
+                        alert.style.transition = 'opacity 0.2s ease';
+                        alert.style.opacity = '0';
+
+                        setTimeout(function () {
+                            alert.remove();
+                        }, 500);
+                    }
+                }, 5000);
+            </script>
+     @endif
 
     @yield('content')
 
