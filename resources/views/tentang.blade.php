@@ -8,7 +8,7 @@
 
     {{-- Header --}}
     <div class="text-center mb-4">
-        <h2 class="fw-bold mb-1"> Tentang Saya</h2>
+        <h2 class="fw-bold mb-1">Tentang Saya</h2>
         <p class="text-muted">
             Profil pengembang dan informasi aplikasi Sweet Cake Bakery
         </p>
@@ -29,7 +29,7 @@
                     >
                         <img
                             src="{{ asset('images/cake.jpg') }}"
-                            alt=""
+                            alt="Sweet Cake Bakery"
                             style="width:100%;height:100%;object-fit:cover;"
                         >
                     </div>
@@ -97,49 +97,39 @@
             </div>
 
 
-            {{-- Teknologi --}}
+            {{-- Teknologi yang Digunakan --}}
             <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
 
                 <h4 class="fw-bold mb-3">
                     Teknologi yang Digunakan
                 </h4>
 
-                <div class="d-flex flex-wrap gap-2">
+                <div class="text-muted">
 
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
+                    <p class="mb-2">
+                        <strong>Bahasa Pemrograman :</strong>
+                        PHP, JavaScript
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>Framework :</strong>
                         Laravel
-                    </span>
+                    </p>
 
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
-                        PHP
-                    </span>
+                    <p class="mb-2">
+                        <strong>Frontend :</strong>
+                        HTML, CSS, Bootstrap
+                    </p>
 
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
+                    <p class="mb-2">
+                        <strong>Database :</strong>
                         MySQL
-                    </span>
+                    </p>
 
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
-                        Bootstrap
-                    </span>
-
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
-                        HTML
-                    </span>
-
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
-                        CSS
-                    </span>
-
-                    <span class="badge rounded-pill px-3 py-2"
-                          style="background:#ffe4ec;color:#b94f73;">
-                        JavaScript
-                    </span>
+                    <p class="mb-0">
+                        <strong>Tools :</strong>
+                        Visual Studio Code, Git
+                    </p>
 
                 </div>
 
@@ -154,7 +144,7 @@
             <div class="bg-white rounded-4 shadow-sm p-4">
 
                 <h4 class="fw-bold mb-3">
-                     Tentang Aplikasi
+                    Tentang Aplikasi
                 </h4>
 
                 <p class="text-muted mb-2">
