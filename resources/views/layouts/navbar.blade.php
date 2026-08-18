@@ -49,6 +49,14 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::is('tentang*') ? 'fw-bold' : '' }}"
+                        href="{{ route('tentang') }}">
+                        <i class="bi bi-cart-fill"></i>
+                        Tentang Saya
+                    </a>
+                </li>
+
                 <li class="nav-item ms-3">
 
                     <form action="{{ route('logout') }}" method="POST">

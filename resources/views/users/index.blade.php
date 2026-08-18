@@ -166,7 +166,7 @@
 
             <div>
                 <h2>
-                    👥 Tim Sweet Cake Bakery
+                     Tim Sweet Cake Bakery
                 </h2>
 
                 <p>
