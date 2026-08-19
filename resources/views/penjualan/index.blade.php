@@ -401,7 +401,7 @@
                                        class="btn btn-edit">
 
                                         <i class="bi bi-pencil"></i>
-                                        Edit
+                                        Lanjutkan
 
                                     </a>
 

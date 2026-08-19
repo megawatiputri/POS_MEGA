@@ -8,7 +8,7 @@
 
     {{-- Header --}}
     <div class="text-center mb-4">
-        <h2 class="fw-bold mb-1">Tentang Saya</h2>
+        <h2 class="fw-bold mb-1"> Tentang Saya</h2>
         <p class="text-muted">
             Profil pengembang dan informasi aplikasi Sweet Cake Bakery
         </p>
@@ -28,7 +28,7 @@
                         style="width:150px;height:150px;background:#ffe8ef;"
                     >
                         <img
-                            src="{{ asset('images/cake.jpg') }}"
+                            src="{{ asset('images/foto.jpeg') }}"
                             alt="Sweet Cake Bakery"
                             style="width:100%;height:100%;object-fit:cover;"
                         >

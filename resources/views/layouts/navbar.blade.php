@@ -52,8 +52,8 @@
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Request::is('tentang*') ? 'fw-bold' : '' }}"
                         href="{{ route('tentang') }}">
-                        <i class="bi bi-cart-fill"></i>
-                        Tentang Saya
+                       <i class="bi bi-person-fill"></i>
+                            Tentang Saya
                     </a>
                 </li>
 
