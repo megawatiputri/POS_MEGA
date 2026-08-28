@@ -138,15 +138,20 @@
         color: #b85b68;
     }
 
+    /* BAGIAN FOOTER CARD */
     .product-footer {
         border-top: 1px solid #eee6e7;
         margin-top: 17px;
         padding-top: 14px;
+
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        min-height: 45px;
     }
 
+    /* TOMBOL LIHAT */
     .btn-detail {
         background: #f6e4e7;
         color: #a85c6c;
@@ -155,6 +160,13 @@
         padding: 7px 18px;
         font-size: 13px;
         font-weight: 600;
+        text-decoration: none;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        white-space: nowrap;
     }
 
     .btn-detail:hover {
@@ -162,28 +174,56 @@
         color: #914b5a;
     }
 
+    /* EDIT DAN HAPUS */
     .product-actions {
         display: flex;
-        gap: 12px;
+        flex-direction: row;
         align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .action-link {
+        display: inline-block;
+
         text-decoration: none;
         font-size: 13px;
         color: #8d7d81;
+
+        white-space: nowrap;
+        line-height: 1.5;
     }
 
     .action-link:hover {
         color: #b85c6d;
     }
 
+    /* FORM HAPUS */
+    .product-actions form {
+        display: inline-flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* TOMBOL HAPUS */
     .delete-link {
+        display: inline-block;
+
         background: none;
         border: none;
         padding: 0;
+        margin: 0;
+
         color: #a88f94;
         font-size: 13px;
+
+        white-space: nowrap;
+        line-height: 1.5;
+        cursor: pointer;
     }
 
     .delete-link:hover {
@@ -198,31 +238,64 @@
         text-align: center;
         color: #8c7d81;
     }
+
+    /* RESPONSIVE */
+    @media (max-width: 576px) {
+
+        .product-footer {
+            gap: 10px;
+        }
+
+        .product-actions {
+            gap: 10px;
+        }
+
+        .btn-detail {
+            padding: 7px 14px;
+        }
+
+        .action-link,
+        .delete-link {
+            font-size: 12px;
+        }
+    }
 </style>
 
 <div class="product-page">
 
     {{-- HEADER --}}
     <div class="bakery-header">
+
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
             <div>
                 <h2>🎂 Sweet Cake Bakery</h2>
-                <p>Koleksi cake yang tersedia di toko.</p>
+
+                <p>
+                    Koleksi cake yang tersedia di toko.
+                </p>
             </div>
 
             @can('create', App\Models\Produk::class)
-                <a href="{{ route('produk.create') }}" class="btn btn-add">
+
+                <a
+                    href="{{ route('produk.create') }}"
+                    class="btn btn-add">
                     Tambah Produk
                 </a>
+
             @endcan
 
         </div>
+
     </div>
 
 
     {{-- SEARCH --}}
-    <form action="{{ route('produk.index') }}" method="GET">
+    <form
+        action="{{ route('produk.index') }}"
+        method="GET">
+
         <div class="input-group search-box">
 
             <input
@@ -237,6 +310,7 @@
             </button>
 
         </div>
+
     </form>
 
 
@@ -270,18 +344,30 @@
                     {{-- INFORMASI --}}
                     <div class="product-body">
 
+                        {{-- NAMA --}}
                         <div class="product-name">
                             {{ $product->nama }}
                         </div>
 
+
+                        {{-- PEMBUAT --}}
                         <div class="product-owner">
+
                             Dibuat oleh
-                            <strong>{{ $product->user->name }}</strong>
+
+                            <strong>
+                                {{ $product->user->name }}
+                            </strong>
+
                         </div>
 
 
+                        {{-- HARGA --}}
                         <div class="product-price">
-                            Rp {{ number_format($product->harga_jual, 0, ',', '.') }}
+
+                            Rp
+                            {{ number_format($product->harga_jual, 0, ',', '.') }}
+
                         </div>
 
 
@@ -310,45 +396,55 @@
                         {{-- AKSI --}}
                         <div class="product-footer">
 
+                            {{-- TOMBOL LIHAT --}}
                             @can('view', $product)
 
                                 <a
                                     href="{{ route('produk.show', $product) }}"
                                     class="btn-detail">
+
                                     Lihat
+
                                 </a>
 
                             @endcan
 
 
+                            {{-- EDIT + HAPUS --}}
                             <div class="product-actions">
 
+                                {{-- EDIT --}}
                                 @can('update', $product)
 
                                     <a
                                         href="{{ route('produk.edit', $product) }}"
                                         class="action-link">
+
                                         Edit
+
                                     </a>
 
                                 @endcan
 
 
+                                {{-- HAPUS --}}
                                 @can('delete', $product)
 
                                     <form
                                         action="{{ route('produk.destroy', $product) }}"
-                                        method="POST"
-                                        class="d-inline">
+                                        method="POST">
 
                                         @csrf
+
                                         @method('DELETE')
 
                                         <button
                                             type="submit"
                                             class="delete-link"
                                             onclick="return confirm('Yakin ingin menghapus produk ini?')">
+
                                             Hapus
+
                                         </button>
 
                                     </form>
@@ -367,6 +463,7 @@
 
         @empty
 
+            {{-- JIKA PRODUK KOSONG --}}
             <div class="col-12">
 
                 <div class="empty-product">
