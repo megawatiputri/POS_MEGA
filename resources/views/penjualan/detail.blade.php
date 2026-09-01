@@ -6,317 +6,262 @@
 
 <div class="container py-4">
 
-    {{-- Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4 no-print">
+    {{-- HEADER --}}
+    <div class="page-header">
 
         <div>
-            <h3 class="fw-bold mb-1">
+            <h2 class="fw-bold mb-1">
                 <i class="bi bi-receipt-cutoff me-2"></i>
                 Detail Penjualan
-            </h3>
+            </h2>
 
             <p class="text-muted mb-0">
                 Informasi lengkap transaksi penjualan
             </p>
         </div>
 
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 no-print">
 
-            {{-- Tombol Kembali --}}
+            <button onclick="window.print()"
+                    class="btn btn-pink rounded-pill px-4">
+                <i class="bi bi-printer me-1"></i>
+                Print
+            </button>
+
             <a href="{{ url()->previous() }}"
                class="btn btn-outline-secondary rounded-pill px-4">
                 <i class="bi bi-arrow-left me-1"></i>
                 Kembali
             </a>
 
-            {{-- Tombol Cetak --}}
-            <button type="button"
-                    onclick="window.print()"
-                    class="btn btn-print rounded-pill px-4">
-                <i class="bi bi-printer me-1"></i>
-                Cetak
-            </button>
+        </div>
+
+    </div>
+
+
+    {{-- INFORMASI TRANSAKSI --}}
+    <div class="transaction-info">
+
+        <div class="info-item">
+
+            <div class="icon-box">
+                <i class="bi bi-person"></i>
+            </div>
+
+            <div>
+                <small>Kasir</small>
+                <strong>
+                    {{ $sale->user->name }}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <div class="icon-box">
+                <i class="bi bi-calendar3"></i>
+            </div>
+
+            <div>
+                <small>Tanggal Transaksi</small>
+                <strong>
+                    {{ $sale->created_at->translatedFormat('d F Y, H:i') }}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <div class="icon-box">
+                <i class="bi bi-cash-stack"></i>
+            </div>
+
+            <div>
+                <small>Total Pembayaran</small>
+
+                <strong class="total-text">
+                    Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
+                </strong>
+            </div>
 
         </div>
 
     </div>
 
 
-    {{-- Area yang akan dicetak --}}
-    <div id="print-area">
+    {{-- PRODUK --}}
+    <div class="product-section">
 
-        {{-- Judul khusus saat print --}}
-        <div class="print-header">
-            <h2>🎂 Sweet Cake Bakery</h2>
-            <p>Detail Transaksi Penjualan</p>
-            <hr>
-        </div>
+        <div class="section-header">
 
+            <div>
 
-        {{-- Informasi Transaksi --}}
-        <div class="card border-0 shadow-sm rounded-4 mb-4">
-
-            <div class="card-body p-4">
-
-                <div class="row g-4">
-
-                    {{-- Kasir --}}
-                    <div class="col-md-4">
-
-                        <div class="d-flex align-items-center">
-
-                            <div class="icon-box me-3">
-                                <i class="bi bi-person"></i>
-                            </div>
-
-                            <div>
-                                <small class="text-muted d-block">
-                                    Kasir
-                                </small>
-
-                                <strong>
-                                    {{ $sale->user->name }}
-                                </strong>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- Tanggal --}}
-                    <div class="col-md-4">
-
-                        <div class="d-flex align-items-center">
-
-                            <div class="icon-box me-3">
-                                <i class="bi bi-calendar3"></i>
-                            </div>
-
-                            <div>
-                                <small class="text-muted d-block">
-                                    Tanggal Transaksi
-                                </small>
-
-                                <strong>
-                                    {{ $sale->created_at->translatedFormat('d F Y, H:i') }}
-                                </strong>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    {{-- Total --}}
-                    <div class="col-md-4">
-
-                        <div class="d-flex align-items-center">
-
-                            <div class="icon-box me-3">
-                                <i class="bi bi-cash-stack"></i>
-                            </div>
-
-                            <div>
-                                <small class="text-muted d-block">
-                                    Total Pembayaran
-                                </small>
-
-                                <strong class="text-success fs-5">
-                                    Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
-                                </strong>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        {{-- Daftar Produk --}}
-        <div class="card border-0 shadow-sm rounded-4">
-
-            <div class="card-header bg-white border-0 p-4 pb-2">
-
-                <h5 class="fw-bold mb-1">
+                <h4 class="fw-bold mb-1">
                     <i class="bi bi-cake2 me-2"></i>
                     Produk yang Dibeli
-                </h5>
+                </h4>
 
-                <small class="text-muted">
+                <p class="text-muted mb-0">
                     Daftar produk dalam transaksi ini
-                </small>
+                </p>
 
             </div>
 
-
-            <div class="card-body p-4">
-
-                <div class="table-responsive">
-
-                    <table class="table align-middle mb-0">
-
-                        <thead>
-
-                            <tr class="text-muted">
-
-                                <th width="60">
-                                    No
-                                </th>
-
-                                <th width="100">
-                                    Produk
-                                </th>
-
-                                <th>
-                                    Nama Produk
-                                </th>
-
-                                <th>
-                                    Harga
-                                </th>
-
-                                <th>
-                                    Jumlah
-                                </th>
-
-                                <th>
-                                    Subtotal
-                                </th>
-
-                            </tr>
-
-                        </thead>
+        </div>
 
 
-                        <tbody>
+        {{-- TABEL PRODUK --}}
+        <div class="product-table-wrapper">
 
-                            @foreach($sale->itempenjualan as $item)
+            <table class="product-table">
 
-                            <tr>
+                <thead>
 
-                                {{-- Nomor --}}
-                                <td class="fw-semibold">
-                                    {{ $loop->iteration }}
-                                </td>
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Produk</th>
+
+                        <th>Nama Produk</th>
+
+                        <th>Harga</th>
+
+                        <th>Jumlah</th>
+
+                        <th>Subtotal</th>
+
+                    </tr>
+
+                </thead>
 
 
-                                {{-- Foto --}}
-                                <td>
+                <tbody>
 
-                                    <div class="product-image">
+                    @foreach($sale->itempenjualan as $item)
 
-                                        @if($item->produk->foto)
+                    <tr>
 
-                                            <img
-                                                src="{{ asset('storage/' . $item->produk->foto) }}"
-                                                alt="{{ $item->produk->nama }}"
-                                            >
+                        {{-- NOMOR --}}
+                        <td class="number">
+                            {{ $loop->iteration }}
+                        </td>
 
-                                        @else
 
-                                            <div class="no-image">
-                                                🎂
-                                            </div>
+                        {{-- FOTO --}}
+                        <td>
 
-                                        @endif
+                            <div class="product-image">
 
+                                @if($item->produk->foto)
+
+                                    <img
+                                        src="{{ asset('storage/' . $item->produk->foto) }}"
+                                        alt="{{ $item->produk->nama }}"
+                                    >
+
+                                @else
+
+                                    <div class="no-image">
+                                        🍰
                                     </div>
 
-                                </td>
+                                @endif
+
+                            </div>
+
+                        </td>
 
 
-                                {{-- Nama --}}
-                                <td>
+                        {{-- NAMA PRODUK --}}
+                        <td>
 
-                                    <span class="fw-semibold">
-                                        {{ $item->produk->nama }}
-                                    </span>
+                            <span class="product-name">
+                                {{ $item->produk->nama }}
+                            </span>
 
-                                </td>
-
-
-                                {{-- Harga --}}
-                                <td>
-                                    Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}
-                                </td>
+                        </td>
 
 
-                                {{-- Jumlah --}}
-                                <td>
+                        {{-- HARGA --}}
+                        <td>
 
-                                    <span class="badge bg-light text-dark px-3 py-2 rounded-pill">
-                                        {{ $item->kuantitas }} pcs
-                                    </span>
+                            Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}
 
-                                </td>
+                        </td>
 
 
-                                {{-- Subtotal --}}
-                                <td>
+                        {{-- JUMLAH --}}
+                        <td>
 
-                                    <strong>
-                                        Rp {{ number_format($item->subtotal, 0, ',', '.') }}
-                                    </strong>
+                            <span class="quantity">
 
-                                </td>
+                                {{ $item->kuantitas }} pcs
 
-                            </tr>
+                            </span>
 
-                            @endforeach
-
-                        </tbody>
-
-                    </table>
-
-                </div>
+                        </td>
 
 
-                {{-- Total --}}
-                <div class="total-box mt-4">
+                        {{-- SUBTOTAL --}}
+                        <td>
 
-                    <div>
+                            <strong>
+                                Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+                            </strong>
 
-                        <small class="text-muted">
-                            Total Pembayaran
-                        </small>
+                        </td>
 
-                        <h4 class="fw-bold mb-0">
-                            Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
-                        </h4>
+                    </tr>
 
-                    </div>
+                    @endforeach
 
+                </tbody>
 
-                    <div class="total-icon">
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
+            </table>
 
-                </div>
+        </div>
 
 
-                {{-- Footer Print --}}
-                <div class="print-footer">
+        {{-- TOTAL --}}
+        <div class="total-box">
 
-                    <hr>
+            <div>
 
-                    <p>
-                        Terima kasih telah berbelanja di
-                        <strong>Sweet Cake Bakery</strong> 🍰
-                    </p>
+                <small>
+                    Total Pembayaran
+                </small>
 
-                    <small>
-                        Semoga harimu menyenangkan!
-                    </small>
-
-                </div>
+                <h3>
+                    Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
+                </h3>
 
             </div>
+
+            <div class="total-icon">
+
+                <i class="bi bi-check-lg"></i>
+
+            </div>
+
+        </div>
+
+
+        {{-- FOOTER --}}
+        <div class="thank-you">
+
+            <p>
+                Terima kasih telah berbelanja di
+                <strong>Sweet Cake Bakery</strong> 🍰
+            </p>
+
+            <small>
+                Semoga harimu menyenangkan!
+            </small>
 
         </div>
 
@@ -327,266 +272,457 @@
 
 <style>
 
-    /* =========================
-       TOMBOL CETAK
-    ========================= */
+/* ============================= */
+/* UMUM */
+/* ============================= */
 
-    .btn-print {
-        background: #f472b6;
-        color: white;
-        border: none;
+body {
+    background: #fff9f6;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-header h2 {
+    color: #172033;
+}
+
+.btn-pink {
+    background: #e87592;
+    color: white;
+    border: none;
+}
+
+.btn-pink:hover {
+    background: #d95f7d;
+    color: white;
+}
+
+
+/* ============================= */
+/* INFORMASI TRANSAKSI */
+/* ============================= */
+
+.transaction-info {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    border: 1px solid #f1e5e7;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: #fff0f3;
+
+    color: #e87592;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+.info-item small {
+    display: block;
+    color: #777;
+    margin-bottom: 3px;
+}
+
+.info-item strong {
+    display: block;
+    color: #172033;
+}
+
+.total-text {
+    color: #168653 !important;
+    font-size: 18px;
+}
+
+
+/* ============================= */
+/* PRODUK */
+/* ============================= */
+
+.product-section {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    border: 1px solid #f1e5e7;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h4 {
+    color: #172033;
+}
+
+
+/* ============================= */
+/* TABEL */
+/* ============================= */
+
+.product-table-wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.product-table th {
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    padding: 15px 8px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.product-table td {
+    padding: 18px 8px;
+
+    border-bottom: 1px solid #f1f1f1;
+
+    vertical-align: middle;
+
+    color: #222;
+
+    font-size: 14px;
+}
+
+.product-table tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* LEBAR KOLOM */
+
+.product-table th:nth-child(1),
+.product-table td:nth-child(1) {
+    width: 7%;
+}
+
+.product-table th:nth-child(2),
+.product-table td:nth-child(2) {
+    width: 13%;
+}
+
+.product-table th:nth-child(3),
+.product-table td:nth-child(3) {
+    width: 27%;
+}
+
+.product-table th:nth-child(4),
+.product-table td:nth-child(4) {
+    width: 20%;
+}
+
+.product-table th:nth-child(5),
+.product-table td:nth-child(5) {
+    width: 15%;
+}
+
+.product-table th:nth-child(6),
+.product-table td:nth-child(6) {
+    width: 18%;
+}
+
+
+/* ============================= */
+/* FOTO PRODUK */
+/* ============================= */
+
+.product-image {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background: #fff5f7;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.no-image {
+    font-size: 25px;
+}
+
+
+/* ============================= */
+/* NAMA PRODUK */
+/* ============================= */
+
+.product-name {
+    font-weight: 600;
+    color: #172033;
+}
+
+
+/* ============================= */
+/* JUMLAH */
+/* ============================= */
+
+.quantity {
+    display: inline-block;
+
+    background: #f8f9fa;
+
+    border-radius: 20px;
+
+    padding: 7px 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ============================= */
+/* TOTAL */
+/* ============================= */
+
+.total-box {
+    margin-top: 25px;
+
+    padding: 20px 25px;
+
+    border-radius: 18px;
+
+    background: #fff7f8;
+
+    border: 1px solid #ffe3e8;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.total-box small {
+    color: #777;
+}
+
+.total-box h3 {
+    margin: 3px 0 0;
+
+    color: #e87592;
+
+    font-weight: 700;
+}
+
+.total-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: #e87592;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+}
+
+
+/* ============================= */
+/* TERIMA KASIH */
+/* ============================= */
+
+.thank-you {
+    text-align: center;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eeeeee;
+
+    color: #444;
+}
+
+.thank-you p {
+    margin-bottom: 8px;
+}
+
+.thank-you strong {
+    color: #172033;
+}
+
+.thank-you small {
+    color: #777;
+}
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    .page-header {
+        align-items: flex-start;
+        gap: 15px;
     }
 
-    .btn-print:hover {
-        background: #ec4899;
-        color: white;
+    .transaction-info {
+        grid-template-columns: 1fr;
     }
 
-
-    /* =========================
-       ICON
-    ========================= */
-
-    .icon-box {
-        width: 45px;
-        height: 45px;
-        border-radius: 14px;
-        background: #fff0f3;
-        color: #e87592;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
+    .product-section {
+        padding: 18px;
     }
 
+    .product-table {
+        table-layout: auto;
+    }
 
-    /* =========================
-       FOTO PRODUK
-    ========================= */
+    .product-table th,
+    .product-table td {
+        padding: 12px 5px;
+        font-size: 12px;
+    }
 
     .product-image {
-        width: 70px;
-        height: 70px;
-        border-radius: 15px;
-        overflow: hidden;
-        background: #fff5f7;
+        width: 48px;
+        height: 48px;
     }
 
-    .product-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+}
+
+
+/* ============================= */
+/* PRINT */
+/* ============================= */
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 15mm;
     }
 
-    .no-image {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
+    body {
+        background: white !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .page-header {
         justify-content: center;
-        font-size: 30px;
-    }
-
-
-    /* =========================
-       TABLE
-    ========================= */
-
-    .table thead th {
-        border-bottom: 1px solid #eee;
-        font-size: 14px;
-        font-weight: 600;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
         padding-bottom: 15px;
     }
 
-    .table tbody td {
-        border-bottom: 1px solid #f1f1f1;
-        padding: 18px 10px;
+    .page-header h2 {
+        font-size: 24px;
     }
 
-    .table tbody tr:last-child td {
-        border-bottom: none;
+    .page-header p {
+        font-size: 14px;
     }
 
-
-    /* =========================
-       TOTAL
-    ========================= */
-
-    .total-box {
-        background: #fff7f8;
-        border-radius: 18px;
-        padding: 20px 24px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border: 1px solid #ffe3e8;
+    .transaction-info,
+    .product-section {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
     }
 
-    .total-box h4 {
-        color: #e87592;
+    .transaction-info {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .total-icon {
+    .product-section {
+        margin-top: 15px;
+    }
+
+    .product-table-wrapper {
+        overflow: visible !important;
+    }
+
+    .product-table {
+        width: 100% !important;
+    }
+
+    .product-image {
         width: 50px;
         height: 50px;
-        border-radius: 50%;
-        background: #e87592;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
     }
 
-
-    /* =========================
-       HEADER PRINT
-    ========================= */
-
-    .print-header {
-        display: none;
-        text-align: center;
+    .thank-you {
+        display: block;
     }
 
-    .print-header h2 {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .print-header p {
-        margin-bottom: 10px;
-    }
-
-
-    .print-footer {
-        display: none;
-        text-align: center;
-    }
-
-
-    /* =========================
-       PRINT
-    ========================= */
-
-    @media print {
-
-        @page {
-            size: A4;
-            margin: 15mm;
-        }
-
-        body {
-            background: white !important;
-        }
-
-        /* Sembunyikan navbar */
-        nav,
-        .navbar {
-            display: none !important;
-        }
-
-        /* Sembunyikan tombol */
-        .no-print {
-            display: none !important;
-        }
-
-        /* Tampilkan header print */
-        .print-header {
-            display: block;
-        }
-
-        /* Tampilkan footer print */
-        .print-footer {
-            display: block;
-        }
-
-        /* Hilangkan shadow */
-        .shadow,
-        .shadow-sm {
-            box-shadow: none !important;
-        }
-
-        /* Card jadi lebih sederhana */
-        .card {
-            border: 1px solid #ddd !important;
-            box-shadow: none !important;
-        }
-
-        /* Hilangkan padding berlebihan */
-        .container {
-            max-width: 100% !important;
-            width: 100% !important;
-            padding: 0 !important;
-        }
-
-        /* Jangan potong tabel */
-        table {
-            page-break-inside: auto;
-        }
-
-        tr {
-            page-break-inside: avoid;
-            page-break-after: auto;
-        }
-
-        /* Warna teks saat print */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        p,
-        span,
-        td,
-        th,
-        strong,
-        small {
-            color: #000 !important;
-        }
-
-        /* Total tetap terlihat */
-        .total-box {
-            background: #fff !important;
-            border: 1px solid #ddd !important;
-        }
-
-        .total-icon {
-            background: #eee !important;
-            color: #000 !important;
-        }
-
-        /* Badge jumlah */
-        .badge {
-            border: 1px solid #ddd !important;
-            background: white !important;
-            color: #000 !important;
-        }
-
-        /* Ukuran foto */
-        .product-image {
-            width: 55px;
-            height: 55px;
-        }
-
-    }
-
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 768px) {
-
-        .table {
-            min-width: 800px;
-        }
-
-        .card-body {
-            padding: 20px !important;
-        }
-
-    }
+}
 
 </style>
 
