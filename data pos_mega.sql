@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `item_penjualan` (
   KEY `item_penjualan_produk_id_foreign` (`produk_id`),
   CONSTRAINT `item_penjualan_penjualan_id_foreign` FOREIGN KEY (`penjualan_id`) REFERENCES `penjualan` (`id`),
   CONSTRAINT `item_penjualan_produk_id_foreign` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table pos_mega.item_penjualan: ~26 rows (approximately)
 INSERT INTO `item_penjualan` (`id`, `penjualan_id`, `produk_id`, `kuantitas`, `harga_satuan`, `subtotal`, `created_at`, `updated_at`) VALUES
@@ -103,7 +103,10 @@ INSERT INTO `item_penjualan` (`id`, `penjualan_id`, `produk_id`, `kuantitas`, `h
 	(32, 19, 3, 1, 100000, 100000, '2026-08-19 03:48:40', '2026-08-19 03:48:40'),
 	(33, 19, 6, 1, 100000, 100000, '2026-08-26 01:52:52', '2026-08-26 01:52:52'),
 	(34, 19, 2, 1, 100000, 100000, '2026-08-26 01:52:59', '2026-08-26 01:52:59'),
-	(35, 21, 4, 1, 100000, 100000, '2026-08-26 01:53:54', '2026-08-26 01:53:54');
+	(35, 21, 4, 1, 100000, 100000, '2026-08-26 01:53:54', '2026-08-26 01:53:54'),
+	(36, 22, 6, 1, 100000, 100000, '2026-09-01 04:07:41', '2026-09-01 04:07:41'),
+	(37, 22, 2, 1, 100000, 100000, '2026-09-01 04:07:43', '2026-09-01 04:07:43'),
+	(38, 23, 4, 1, 100000, 100000, '2026-09-01 04:28:23', '2026-09-01 04:28:23');
 
 -- Dumping structure for table pos_mega.jobs
 CREATE TABLE IF NOT EXISTS `jobs` (
@@ -177,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `penjualan` (
   PRIMARY KEY (`id`),
   KEY `penjualan_user_id_foreign` (`user_id`),
   CONSTRAINT `penjualan_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table pos_mega.penjualan: ~16 rows (approximately)
 INSERT INTO `penjualan` (`id`, `user_id`, `total_pembayaran`, `metode_pembayaran`, `status`, `created_at`, `updated_at`) VALUES
@@ -198,7 +201,9 @@ INSERT INTO `penjualan` (`id`, `user_id`, `total_pembayaran`, `metode_pembayaran
 	(18, 7, 200000, 'CASH', 'COMPLETED', '2026-08-19 03:47:55', '2026-08-19 03:48:11'),
 	(19, 7, 300000, 'QRIS', 'COMPLETED', '2026-08-19 03:48:36', '2026-08-26 01:53:14'),
 	(20, 3, 0, 'CASH', 'OPEN', '2026-08-19 04:36:25', '2026-08-19 04:36:25'),
-	(21, 7, 100000, 'CASH', 'COMPLETED', '2026-08-26 01:53:37', '2026-08-26 01:54:07');
+	(21, 7, 100000, 'CASH', 'COMPLETED', '2026-08-26 01:53:37', '2026-08-26 01:54:07'),
+	(22, 7, 200000, 'QRIS', 'COMPLETED', '2026-09-01 04:07:34', '2026-09-01 04:07:59'),
+	(23, 7, 100000, 'QRIS', 'COMPLETED', '2026-09-01 04:28:19', '2026-09-01 04:38:08');
 
 -- Dumping structure for table pos_mega.produk
 CREATE TABLE IF NOT EXISTS `produk` (
@@ -219,12 +224,12 @@ CREATE TABLE IF NOT EXISTS `produk` (
 
 -- Dumping data for table pos_mega.produk: ~6 rows (approximately)
 INSERT INTO `produk` (`id`, `user_id`, `foto`, `nama`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES
-	(1, 4, 'products/2hujRfMrewUIW7ANeOxf2HlXqQNzrpXFqhgQTqbH.jpg', 'Tres Leches Red Berry', 85000, 100000, 87, '2026-07-31 06:52:19', '2026-08-10 06:45:14'),
-	(2, 2, 'products/0x9gwvpKu2KltHf2EmlIVXqCnr18Gi7ytD1zAgXD.jpg', 'Mille Feuille', 80000, 100000, 82, '2026-07-31 06:53:27', '2026-08-26 01:52:59'),
-	(3, 2, 'products/efAHllnU1mmitnzO9JpYz7C6qUgHMDuT5xJgP5Cg.jpg', 'Coco Cake', 79000, 100000, 81, '2026-07-31 06:54:22', '2026-08-19 03:48:40'),
-	(4, 4, 'products/fu0OJpbJqZQvezfFH4AzLJGsSqBkhpTuyp8Rsq1d.jpg', 'Carrot Cake', 80000, 100000, 82, '2026-07-31 06:56:27', '2026-08-26 01:53:54'),
-	(5, 2, 'products/OnlECSlIn3SyVadCIxs2KvxbFgDKFBmrfNDNRWbh.jpg', 'Mocca Nougat', 85000, 100000, 87, '2026-07-31 06:57:27', '2026-08-19 03:48:05'),
-	(6, 4, 'products/Z2E4QIp5DKbw2sm3XPcOf5NOfmX1qpH5wbSfK7qb.png', 'Earl Grey Crème', 90000, 100000, 85, '2026-07-31 07:07:20', '2026-08-26 01:52:52');
+	(1, 7, 'products/FVuDeevUheY7SsZlZA86mobIIK6hKWE5tKUAfGWI.jpg', 'Tres Leches Red Berry', 85000, 100000, 87, '2026-07-31 06:52:19', '2026-09-01 03:51:37'),
+	(2, 7, 'products/lW5BcDLQZoKq03vkefXE2fjtQgqxJqMrVmxG7xAX.jpg', 'Mille Feuille', 80000, 100000, 81, '2026-07-31 06:53:27', '2026-09-01 04:07:43'),
+	(3, 7, 'products/f25LmJei2oihppk3wSN1y6NBSN4CRzanS77j7C8X.jpg', 'Coco Cake', 79000, 100000, 81, '2026-07-31 06:54:22', '2026-09-01 03:52:50'),
+	(4, 7, 'products/Ib4X4Un8xRiK359xsTtmRZ2iU5pSPuUwlovV8epx.jpg', 'Carrot Cake', 80000, 100000, 81, '2026-07-31 06:56:27', '2026-09-01 04:28:23'),
+	(5, 7, 'products/5muekP9s77JS6HVHwbmar5uGgxFs8bOTyelQChg5.jpg', 'Mocca Nougat', 85000, 100000, 87, '2026-07-31 06:57:27', '2026-09-01 03:50:13'),
+	(6, 7, 'products/DPV6YRpcdMH7CwhmNEznrSu1SSHUYXQ7mgG0UF7O.png', 'Earl Grey Crème', 90000, 100000, 84, '2026-07-31 07:07:20', '2026-09-01 04:07:41');
 
 -- Dumping structure for table pos_mega.roles
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -253,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table pos_mega.sessions: ~1 rows (approximately)
+-- Dumping data for table pos_mega.sessions: ~2 rows (approximately)
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
 	('ddtCvWy1oaqTKMgmDudHwoHVHhgURpq5bwy5I30P', 7, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNTNOa0lGNkhGY0k3b3pGODFlYUdydHpUNXRCS1gzejBTQkI1Z0d3byI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZW5qdWFsYW4iO3M6NToicm91dGUiO3M6MTU6InBlbmp1YWxhbi5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjc7fQ==', 1787709373),
 	('RwqVFqu2p2vDYZIjxfFcxdiD7I9hYSGzLKtfUcsD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiN2IwTUZIY25ZS296UkVMbDRyV0h6c3Y5dnlmcWE0OWg2RVlSeThuSyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fX0=', 1787888197);
