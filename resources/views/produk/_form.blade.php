@@ -47,7 +47,7 @@
             <div class="col-md-6 mb-3">
 
                 <label class="form-label fw-semibold">
-                    Harga Beli
+                    Harga Pokok
                 </label>
 
                 <div class="input-group">

@@ -214,15 +214,67 @@
                         onsubmit="return confirm('Yakin ingin checkout?')" class="mt-2">
                     @csrf
                     @method('PUT')
-                    <select name="payment_method" class="form-select mb-2">
-                        <option value="">Pilih Pembayaran</option>
-                        <option value="CASH">CASH</option>
-                        <option value="QRIS">QRIS</option>
-                    </select>
+                <label class="form-label fw-semibold">
+                    Metode Pembayaran
+                </label>
 
-                    <button class="btn btn-success btn-lg rounded-pill w-100 shadow">
-                             Checkout Sekarang
-                    </button>
+                <select name="payment_method"
+                        id="payment_method"
+                        class="form-select mb-3"
+                        required>
+
+                    <option value="">Pilih Pembayaran</option>
+                    <option value="CASH"> CASH</option>
+                    <option value="QRIS"> QRIS</option>
+
+                </select>
+
+                {{-- Bagian pembayaran CASH --}}
+                <div id="cash-section">
+
+                    <label class="form-label fw-semibold">
+                        Uang Dibayar
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Rp</span>
+
+                        <input
+                            type="number"
+                            name="uang_dibayar"
+                            id="uang_dibayar"
+                            class="form-control"
+                            min="{{ $sale->total_pembayaran }}">
+                    </div>
+
+                    {{-- Kembalian --}}
+                    <div class="p-3 rounded-4 mb-3"
+                        style="background:#e8fff1;">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <span class="fw-semibold text-success">
+                                 Kembalian
+                            </span>
+
+                            <strong id="kembalian"
+                                    class="fs-4 text-success">
+                                Rp 0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success btn-lg rounded-pill w-100 shadow">
+
+                     Checkout Sekarang
+
+                </button>
                 </form>
                 @can('delete', $sale)
                 <form action="{{ route('penjualan.destroy', $sale->id) }}"
@@ -242,5 +294,69 @@
     </div>
 
 </div>
+
+<script>
+    const paymentMethod = document.getElementById('payment_method');
+    const uangDibayar = document.getElementById('uang_dibayar');
+    const kembalian = document.getElementById('kembalian');
+    const cashSection = document.getElementById('cash-section');
+
+    const total = {{ $sale->total_pembayaran }};
+
+    function hitungKembalian() {
+
+        let uang = parseFloat(uangDibayar.value) || 0;
+
+        let hasil = uang - total;
+
+        if (uang === 0) {
+
+            kembalian.innerText = 'Rp 0';
+
+            kembalian.classList.remove('text-danger');
+            kembalian.classList.add('text-success');
+
+        } else if (hasil < 0) {
+
+            kembalian.innerText = 'Uang kurang';
+
+            kembalian.classList.remove('text-success');
+            kembalian.classList.add('text-danger');
+
+        } else {
+
+            kembalian.innerText =
+                'Rp ' + hasil.toLocaleString('id-ID');
+
+            kembalian.classList.remove('text-danger');
+            kembalian.classList.add('text-success');
+        }
+    }
+
+    uangDibayar.addEventListener('input', hitungKembalian);
+
+
+    paymentMethod.addEventListener('change', function () {
+
+        if (this.value === 'CASH') {
+
+            cashSection.style.display = 'block';
+
+            uangDibayar.required = true;
+
+        } else {
+
+            cashSection.style.display = 'none';
+
+            uangDibayar.required = false;
+
+            uangDibayar.value = '';
+
+            kembalian.innerText = 'Rp 0';
+
+        }
+
+    });
+</script>
 
 @endsection

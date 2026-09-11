@@ -114,37 +114,50 @@ class PenjualanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Penjualan $penjualan)
-    {
-        $request->validate([
-            'payment_method' => 'required|in:CASH,QRIS,TRANSFER'
-        ]);
-
-        if ($penjualan->status !== 'OPEN') {
-            return back()->with('errors', 'Transaksi sudah diproses');
-        }
-
-        if ($penjualan->itemPenjualan()->count() === 0) {
-            return back()->with('errors', 'Keranjang masih kosong');
-        }
-
-        DB::transaction(function () use ($penjualan, $request) {
-
-            // Hitung ulang total (anti manipulasi)
-            $total = $penjualan->itemPenjualan()->sum('subtotal');
-
-            $penjualan->update([
-                'metode_pembayaran' => $request->payment_method,
-                'total_pembayaran'  => $total,
-                'status'            => 'COMPLETED'
+         public function update(Request $request, Penjualan $penjualan)
+        {
+            $request->validate([
+                'payment_method' => 'required|in:CASH,QRIS,TRANSFER',
+                'uang_dibayar' => 'required|numeric|min:0',
             ]);
-        });
 
-        return redirect()
-            ->route('penjualan.index')
-            ->with('success', 'Transaksi berhasil diselesaikan');
+            if ($penjualan->status !== 'OPEN') {
+                return back()->with('errors', 'Transaksi sudah diproses');
+            }
+
+            if ($penjualan->itemPenjualan()->count() === 0) {
+                return back()->with('errors', 'Keranjang masih kosong');
+            }
+
+            DB::transaction(function () use ($penjualan, $request) {
+
+                // Hitung ulang total dari item keranjang
+                $total = $penjualan->itemPenjualan()->sum('subtotal');
+
+                // Uang yang diberikan pelanggan
+                $uangDibayar = $request->uang_dibayar;
+
+                // Cek apakah uang cukup
+                if ($uangDibayar < $total) {
+                    throw new \Exception('Uang yang dibayarkan kurang.');
+                }
+
+                // Hitung kembalian
+                $kembalian = $uangDibayar - $total;
+
+                $penjualan->update([
+                    'metode_pembayaran' => $request->payment_method,
+                    'total_pembayaran' => $total,
+                    'uang_dibayar' => $uangDibayar,
+                    'kembalian' => $kembalian,
+                    'status' => 'COMPLETED'
+                ]);
+            });
+
+            return redirect()
+                ->route('penjualan.index')
+                ->with('success', 'Transaksi berhasil diselesaikan');
         }
-
     /**
      * Remove the specified resource from storage.
      */
