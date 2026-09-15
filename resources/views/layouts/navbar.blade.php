@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <a class="navbar-brand fw-bold text-white" href="{{ route('beranda') }}">
+        <a class="navbar-brand fw-bold text-white" href="{{ route('profil.toko') }}">
             🎂 Sweet Cake Bakery
         </a>
 

@@ -23,6 +23,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/beranda', [DashboardController::class, 'index'])
         ->name('beranda');
 
+    // Profil Toko (Sweet Cake Bakery) - Langsung memanggil view profil_toko
+    Route::get('/profil-toko', function () {
+        return view('profil_toko');
+    })->name('profil.toko');
+
     // Tentang Saya
     Route::get('/tentang', function () {
         return view('tentang');
