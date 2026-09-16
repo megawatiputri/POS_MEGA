@@ -229,6 +229,40 @@
 
                 </select>
 
+                {{-- Bagian QRIS --}}
+                <div id="qris-section" class="text-center mb-3" style="display: none;">
+
+                    <div class="p-3 rounded-4"
+                        style="background:#fff7fa; border:1px solid #f3c5d5;">
+
+                        <h5 class="fw-bold mb-2">
+                            📱 Pembayaran QRIS
+                        </h5>
+
+                        <p class="text-muted small">
+                            Silakan scan QRIS untuk melakukan pembayaran
+                        </p>
+
+                        <img
+                            src="{{ asset('images/qris-sweet-cake.jpeg') }}"
+                            alt="QRIS Sweet Cake Bakery"
+                            class="img-fluid rounded-3 shadow-sm"
+                            style="max-width:300px;">
+
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                Total Pembayaran
+                            </small>
+
+                            <h4 class="fw-bold text-success">
+                                Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
+                            </h4>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 {{-- Bagian pembayaran CASH --}}
                 <div id="cash-section">
 
@@ -296,17 +330,18 @@
 </div>
 
 <script>
+
     const paymentMethod = document.getElementById('payment_method');
     const uangDibayar = document.getElementById('uang_dibayar');
     const kembalian = document.getElementById('kembalian');
     const cashSection = document.getElementById('cash-section');
+    const qrisSection = document.getElementById('qris-section');
 
     const total = {{ $sale->total_pembayaran }};
 
     function hitungKembalian() {
 
         let uang = parseFloat(uangDibayar.value) || 0;
-
         let hasil = uang - total;
 
         if (uang === 0) {
@@ -330,6 +365,7 @@
 
             kembalian.classList.remove('text-danger');
             kembalian.classList.add('text-success');
+
         }
     }
 
@@ -340,16 +376,38 @@
 
         if (this.value === 'CASH') {
 
+            // Tampilkan pembayaran CASH
             cashSection.style.display = 'block';
+
+            // Sembunyikan QRIS
+            qrisSection.style.display = 'none';
 
             uangDibayar.required = true;
 
-        } else {
+        } 
+        
+        else if (this.value === 'QRIS') {
 
+            // Sembunyikan pembayaran CASH
             cashSection.style.display = 'none';
 
-            uangDibayar.required = false;
+            // Tampilkan QRIS
+            qrisSection.style.display = 'block';
 
+            uangDibayar.required = false;
+            uangDibayar.value = '';
+
+            kembalian.innerText = 'Rp 0';
+
+        } 
+        
+        else {
+
+            // Sembunyikan CASH dan QRIS
+            cashSection.style.display = 'none';
+            qrisSection.style.display = 'none';
+
+            uangDibayar.required = false;
             uangDibayar.value = '';
 
             kembalian.innerText = 'Rp 0';
@@ -357,6 +415,7 @@
         }
 
     });
+
 </script>
 
 @endsection
