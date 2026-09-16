@@ -21,7 +21,6 @@
         </div>
 
         <div class="d-flex gap-2 no-print">
-
             <button onclick="window.print()"
                     class="btn btn-pink rounded-pill px-4">
                 <i class="bi bi-printer me-1"></i>
@@ -33,7 +32,6 @@
                 <i class="bi bi-arrow-left me-1"></i>
                 Kembali
             </a>
-
         </div>
 
     </div>
@@ -50,6 +48,7 @@
 
             <div>
                 <small>Kasir</small>
+
                 <strong>
                     {{ $sale->user->name }}
                 </strong>
@@ -66,6 +65,7 @@
 
             <div>
                 <small>Tanggal Transaksi</small>
+
                 <strong>
                     {{ $sale->created_at->translatedFormat('d F Y, H:i') }}
                 </strong>
@@ -122,19 +122,12 @@
                 <thead>
 
                     <tr>
-
                         <th>No</th>
-
                         <th>Produk</th>
-
                         <th>Nama Produk</th>
-
                         <th>Harga</th>
-
                         <th>Jumlah</th>
-
                         <th>Subtotal</th>
-
                     </tr>
 
                 </thead>
@@ -189,9 +182,7 @@
 
                         {{-- HARGA --}}
                         <td>
-
                             Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}
-
                         </td>
 
 
@@ -199,9 +190,7 @@
                         <td>
 
                             <span class="quantity">
-
                                 {{ $item->kuantitas }} pcs
-
                             </span>
 
                         </td>
@@ -227,10 +216,11 @@
         </div>
 
 
-        {{-- TOTAL --}}
+        {{-- TOTAL PEMBAYARAN --}}
         <div class="total-box">
 
-            <div>
+            {{-- TOTAL --}}
+            <div class="total-main">
 
                 <small>
                     Total Pembayaran
@@ -242,6 +232,39 @@
 
             </div>
 
+
+            {{-- DETAIL PEMBAYARAN --}}
+            <div class="payment-detail">
+
+                <div class="payment-row">
+
+                    <span>
+                        Uang Dibayar
+                    </span>
+
+                    <strong>
+                        Rp {{ number_format($sale->uang_dibayar, 0, ',', '.') }}
+                    </strong>
+
+                </div>
+
+
+                <div class="payment-row">
+
+                    <span>
+                        Kembalian
+                    </span>
+
+                    <strong class="text-success">
+                        Rp {{ number_format($sale->kembalian, 0, ',', '.') }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            {{-- ICON --}}
             <div class="total-icon">
 
                 <i class="bi bi-check-lg"></i>
@@ -255,8 +278,13 @@
         <div class="thank-you">
 
             <p>
+
                 Terima kasih telah berbelanja di
-                <strong>Sweet Cake Bakery</strong> 🍰
+
+                <strong>
+                    Sweet Cake Bakery
+                </strong> 🍰
+
             </p>
 
             <small>
@@ -336,7 +364,6 @@ body {
     border-radius: 14px;
 
     background: #fff0f3;
-
     color: #e87592;
 
     display: flex;
@@ -371,7 +398,6 @@ body {
 
 .product-section {
     background: white;
-
     border-radius: 20px;
 
     padding: 25px;
@@ -407,9 +433,7 @@ body {
 
 .product-table th {
     color: #333;
-
     font-size: 14px;
-
     font-weight: 600;
 
     text-align: left;
@@ -436,7 +460,9 @@ body {
 }
 
 
+/* ============================= */
 /* LEBAR KOLOM */
+/* ============================= */
 
 .product-table th:nth-child(1),
 .product-table td:nth-child(1) {
@@ -532,10 +558,11 @@ body {
 
 
 /* ============================= */
-/* TOTAL */
+/* TOTAL & PEMBAYARAN */
 /* ============================= */
 
 .total-box {
+
     margin-top: 25px;
 
     padding: 20px 25px;
@@ -546,18 +573,23 @@ body {
 
     border: 1px solid #ffe3e8;
 
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
+    position: relative;
 }
 
-.total-box small {
+
+/* Total utama */
+
+.total-main {
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #f1dfe3;
+}
+
+.total-main small {
     color: #777;
 }
 
-.total-box h3 {
+.total-main h3 {
     margin: 3px 0 0;
 
     color: #e87592;
@@ -565,7 +597,48 @@ body {
     font-weight: 700;
 }
 
+
+/* Detail pembayaran */
+
+.payment-detail {
+    padding-top: 15px;
+}
+
+.payment-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 7px 0;
+
+    font-size: 14px;
+}
+
+.payment-row span {
+    color: #666;
+}
+
+.payment-row strong {
+    color: #172033;
+    font-size: 15px;
+}
+
+.payment-row strong.text-success {
+    color: #168653 !important;
+}
+
+
+/* Icon */
+
 .total-icon {
+
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
     width: 48px;
     height: 48px;
 
@@ -578,7 +651,6 @@ body {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     font-size: 22px;
@@ -590,6 +662,7 @@ body {
 /* ============================= */
 
 .thank-you {
+
     text-align: center;
 
     margin-top: 25px;
@@ -648,6 +721,15 @@ body {
         height: 48px;
     }
 
+    .total-icon {
+        right: 18px;
+        top: 18px;
+    }
+
+    .payment-row {
+        padding-right: 60px;
+    }
+
 }
 
 
@@ -679,7 +761,9 @@ body {
     .page-header {
         justify-content: center;
         text-align: center;
+
         border-bottom: 1px solid #ccc;
+
         padding-bottom: 15px;
     }
 
@@ -693,7 +777,9 @@ body {
 
     .transaction-info,
     .product-section {
+
         box-shadow: none !important;
+
         border: 1px solid #ddd !important;
     }
 
@@ -720,6 +806,11 @@ body {
 
     .thank-you {
         display: block;
+    }
+
+    .total-box {
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
 
 }
