@@ -7,48 +7,10 @@
     <title>Laporan Penjualan - Sweet Cake Bakery</title>
 
     <style>
-
         body {
             font-family: Arial, sans-serif;
             padding: 30px;
             color: #333;
-        }
-
-        /* =========================
-           TOMBOL
-        ========================== */
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .back-button,
-        .print-button {
-            padding: 10px 18px;
-            border-radius: 6px;
-            color: white;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .back-button {
-            background: #888;
-        }
-
-        .print-button {
-            background: #e99ab5;
-        }
-
-        .back-button:hover {
-            background: #777;
-        }
-
-        .print-button:hover {
-            background: #dc87a4;
         }
 
         /* =========================
@@ -126,6 +88,44 @@
         }
 
         /* =========================
+           TOMBOL BAWAH
+        ========================== */
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .back-button,
+        .print-button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .back-button {
+            background: #999;
+        }
+
+        .print-button {
+            background: #e99ab5;
+        }
+
+        .back-button:hover {
+            background: #888;
+        }
+
+        .print-button:hover {
+            background: #dc87a4;
+        }
+
+        /* =========================
            FOOTER
         ========================== */
 
@@ -147,31 +147,12 @@
             body {
                 padding: 0;
             }
-
         }
-
     </style>
 
 </head>
 
 <body>
-
-    <!-- =========================
-         TOMBOL
-    ========================== -->
-
-    <div class="button-group">
-
-        <a href="{{ route('beranda') }}" class="back-button">
-            ↩️ Kembali
-        </a>
-
-        <button class="print-button" onclick="window.print()">
-            🖨️ Print Laporan
-        </button>
-
-    </div>
-
 
     <!-- =========================
          HEADER LAPORAN
@@ -197,8 +178,6 @@
 
     <div class="ringkasan">
 
-        <!-- Total Transaksi -->
-
         <div class="box">
 
             <h4>
@@ -211,8 +190,6 @@
 
         </div>
 
-
-        <!-- Total Penjualan -->
 
         <div class="box">
 
@@ -227,8 +204,6 @@
         </div>
 
 
-        <!-- Pembayaran Cash -->
-
         <div class="box">
 
             <h4>
@@ -241,8 +216,6 @@
 
         </div>
 
-
-        <!-- Pembayaran Non Tunai -->
 
         <div class="box">
 
@@ -339,6 +312,25 @@
         </p>
 
     </div>
+
+
+    <!-- =========================
+         TOMBOL
+         ADA DI BAWAH LAPORAN
+    ========================== -->
+
+    <div class="button-group">
+
+        <a href="{{ route('beranda') }}" class="back-button">
+            ↩ Kembali
+        </a>
+
+        <button class="print-button" onclick="window.print()">
+            🖨️ Print Laporan
+        </button>
+
+    </div>
+
 
 </body>
 

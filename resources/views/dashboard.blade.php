@@ -25,16 +25,20 @@
 
     @can('viewAny', App\Models\User::class)
 
-    <h3 class="fw-bold mb-4">
-         Ringkasan Penjualan Hari Ini
-    </h3>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div class="mb-4">
+        <h3 class="fw-bold mb-0">
+            Ringkasan Penjualan Hari Ini
+        </h3>
+
         <a href="{{ route('beranda.printLaporan') }}"
         target="_blank"
-        class="btn btn-dark rounded-3">
-            🖨️ Print Laporan Penjualan
+        class="btn btn-sm rounded-pill"
+        style="background:#f3a6bd; color:white; padding:8px 18px;">
+            <i class="bi bi-printer-fill"></i>
+            Print Laporan
         </a>
+
     </div>
 
     <div class="row g-4">
