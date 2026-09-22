@@ -15,15 +15,26 @@ class DashboardController extends Controller
     ) {}
 
     public function index()
-    {
-        $ringkasan = $this->laporanService->ringkasanHariIni();
+        {
+            $ringkasan = $this->laporanService->ringkasanHariIni();
 
-        return view('dashboard', [
-            'tanggalHariIni'  => Carbon::now(),
-            'ringkasan'        => $ringkasan,
-            'produkTerlaris' => $this->laporanService->produkTerlarisHariIni(),
-            'produkStokRendah' => $this->stokService->produkStokRendah(),
-            'produkStokHabis'  => $this->stokService->produkStokHabis(),
-        ]);
-    }
+            return view('dashboard', [
+                'tanggalHariIni'  => Carbon::now(),
+                'ringkasan'        => $ringkasan,
+                'produkTerlaris' => $this->laporanService->produkTerlarisHariIni(),
+                'produkStokRendah' => $this->stokService->produkStokRendah(),
+                'produkStokHabis'  => $this->stokService->produkStokHabis(),
+            ]);
+        }
+
+        public function printLaporan()
+        {
+            $ringkasan = $this->laporanService->ringkasanHariIni();
+
+            return view('laporan.penjualan', [
+                'tanggalHariIni' => Carbon::now(),
+                'ringkasan' => $ringkasan,
+                'produkTerlaris' => $this->laporanService->produkTerlarisHariIni(),
+            ]);
+        }
 }

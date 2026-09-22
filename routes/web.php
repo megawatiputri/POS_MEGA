@@ -22,6 +22,9 @@ Route::middleware('guest')->group(function () {
 // Route yang bisa diakses ketika user sudah login
 Route::middleware('auth')->group(function () {
 
+    Route::get('/beranda/print-laporan', [DashboardController::class, 'printLaporan'])
+    ->name('beranda.printLaporan');
+
     Route::get('/kartu-ucapan', [KartuUcapanController::class, 'create'])
     ->name('kartu-ucapan.create');
 

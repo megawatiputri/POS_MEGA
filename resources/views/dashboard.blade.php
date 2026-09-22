@@ -29,6 +29,14 @@
          Ringkasan Penjualan Hari Ini
     </h3>
 
+    <div class="mb-4">
+        <a href="{{ route('beranda.printLaporan') }}"
+        target="_blank"
+        class="btn btn-dark rounded-3">
+            🖨️ Print Laporan Penjualan
+        </a>
+    </div>
+
     <div class="row g-4">
 
         <div class="col-md-6">

@@ -5,7 +5,7 @@
     {{-- FORM --}}
     <div class="col-lg-8">
 
-        {{-- Foto Produk --}}
+        {{-- FOTO PRODUK --}}
         <div class="mb-3">
             <label class="form-label fw-semibold">
                 Foto Produk
@@ -24,7 +24,8 @@
             @enderror
         </div>
 
-        {{-- Nama Produk --}}
+
+        {{-- NAMA PRODUK --}}
         <div class="mb-3">
             <label class="form-label fw-semibold">
                 Nama Produk
@@ -44,7 +45,8 @@
             @enderror
         </div>
 
-        {{-- Deskripsi Produk --}}
+
+        {{-- DESKRIPSI --}}
         <div class="mb-3">
             <label class="form-label fw-semibold">
                 📝 Deskripsi Produk
@@ -67,9 +69,11 @@
             </small>
         </div>
 
-        {{-- Harga --}}
+
+        {{-- HARGA --}}
         <div class="row">
 
+            {{-- HARGA POKOK --}}
             <div class="col-md-6 mb-3">
 
                 <label class="form-label fw-semibold">
@@ -85,8 +89,12 @@
                     <input
                         type="number"
                         name="purchase_price"
+                        id="purchase_price"
                         class="form-control @error('purchase_price') is-invalid @enderror"
-                        value="{{ old('purchase_price', $produk->harga_beli ?? '') }}">
+                        value="{{ old('purchase_price', $produk->harga_beli ?? '') }}"
+                        placeholder="Masukkan harga pokok"
+                        min="0"
+                        oninput="hitungHargaJual()">
 
                 </div>
 
@@ -98,10 +106,13 @@
 
             </div>
 
+
+            {{-- HARGA JUAL --}}
             <div class="col-md-6 mb-3">
 
                 <label class="form-label fw-semibold">
                     Harga Jual
+                    <small class="text-muted">(Otomatis +30%)</small>
                 </label>
 
                 <div class="input-group">
@@ -113,10 +124,17 @@
                     <input
                         type="number"
                         name="selling_price"
+                        id="selling_price"
                         class="form-control @error('selling_price') is-invalid @enderror"
-                        value="{{ old('selling_price', $produk->harga_jual ?? '') }}">
+                        value="{{ old('selling_price', $produk->harga_jual ?? '') }}"
+                        placeholder="Otomatis"
+                        readonly>
 
                 </div>
+
+                <small class="text-muted">
+                    Harga jual otomatis dihitung dari harga pokok + 30%.
+                </small>
 
                 @error('selling_price')
                     <div class="invalid-feedback d-block">
@@ -128,7 +146,8 @@
 
         </div>
 
-        {{-- Stok --}}
+
+        {{-- STOK --}}
         <div class="mb-4">
 
             <label class="form-label fw-semibold">
@@ -150,18 +169,24 @@
 
         </div>
 
+
+        {{-- TOMBOL --}}
         <button class="btn btn-primary px-4">
             Simpan
         </button>
 
-        <a href="{{ route('produk.index') }}"
-           class="btn btn-outline-secondary px-4">
+        <a
+            href="{{ route('produk.index') }}"
+            class="btn btn-outline-secondary px-4">
+
             Kembali
+
         </a>
 
     </div>
 
-    {{-- PREVIEW --}}
+
+    {{-- PREVIEW FOTO --}}
     <div class="col-lg-4">
 
         <div class="card shadow-sm rounded-4">
@@ -187,7 +212,9 @@
                         class="img-fluid rounded-3 border"
                         style="display:none;max-height:260px;object-fit:cover;">
 
-                    <div id="placeholder" class="text-muted py-5">
+                    <div
+                        id="placeholder"
+                        class="text-muted py-5">
 
                         📷
 
@@ -207,8 +234,36 @@
 
 </div>
 
+
 <script>
-function previewImage(input){
+
+// ==========================================
+// HITUNG HARGA JUAL OTOMATIS +30%
+// ==========================================
+function hitungHargaJual() {
+
+    const hargaPokok = document.getElementById('purchase_price').value;
+    const hargaJual = document.getElementById('selling_price');
+
+    if (hargaPokok && hargaPokok > 0) {
+
+        // Harga pokok + 30%
+        const hasil = Math.round(Number(hargaPokok) * 1.30);
+
+        hargaJual.value = hasil;
+
+    } else {
+
+        hargaJual.value = '';
+
+    }
+}
+
+
+// ==========================================
+// PREVIEW FOTO
+// ==========================================
+function previewImage(input) {
 
     const file = input.files[0];
 
@@ -216,17 +271,32 @@ function previewImage(input){
 
     const placeholder = document.getElementById('placeholder');
 
-    if(file){
+    if (file) {
 
         preview.src = URL.createObjectURL(file);
 
         preview.style.display = 'block';
 
-        if(placeholder){
+        if (placeholder) {
             placeholder.style.display = 'none';
         }
 
     }
 
 }
+
+
+// ==========================================
+// HITUNG SAAT HALAMAN EDIT DIBUKA
+// ==========================================
+document.addEventListener('DOMContentLoaded', function () {
+
+    const hargaPokok = document.getElementById('purchase_price');
+
+    if (hargaPokok && hargaPokok.value) {
+        hitungHargaJual();
+    }
+
+});
+
 </script>

@@ -58,7 +58,7 @@ class ProdukController extends Controller
         $data['nama'] = $dataReq['name'];
         $data['deskripsi'] = $dataReq['deskripsi'] ?? null;
         $data['harga_beli'] = $dataReq['purchase_price'];
-        $data['harga_jual'] = $dataReq['selling_price'];
+        $data['harga_jual'] = round($dataReq['purchase_price'] * 1.30);
         $data['stok'] = $dataReq['stock'] ?? true;
 
         if ($request->hasFile('foto')) {
@@ -103,8 +103,8 @@ class ProdukController extends Controller
         'user_id'   => Auth::id(),
         'nama'      => $dataReq['name'],
         'deskripsi'  => $dataReq['deskripsi'] ?? null,
-        'harga_beli'=> $dataReq['purchase_price'],
-        'harga_jual'=> $dataReq['selling_price'],
+        'harga_beli' => $dataReq['purchase_price'],
+        'harga_jual' => round($dataReq['purchase_price'] * 1.30),
         'stok'      => $dataReq['stock'],
 
 
