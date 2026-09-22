@@ -50,6 +50,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link text-white {{ Request::is('admin/custom-cake') ? 'fw-bold' : '' }}"
+                        href="{{ route('custom-cake.index') }}">
+                        <i class="bi bi-cake2-fill"></i> Request Custom Cake
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link text-white {{ Request::is('tentang*') ? 'fw-bold' : '' }}"
                         href="{{ route('tentang') }}">
                        <i class="bi bi-person-fill"></i>

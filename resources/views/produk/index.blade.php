@@ -93,7 +93,20 @@
         color: #30282a;
         font-size: 21px;
         font-weight: 700;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
+    }
+
+    /* DESKRIPSI PRODUK */
+    .product-description {
+        color: #8b7b7f;
+        font-size: 13px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     .product-owner {
@@ -269,11 +282,13 @@
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
             <div>
+
                 <h2>🎂 Sweet Cake Bakery</h2>
 
                 <p>
                     Koleksi cake yang tersedia di toko.
                 </p>
+
             </div>
 
             @can('create', App\Models\Produk::class)
@@ -281,7 +296,9 @@
                 <a
                     href="{{ route('produk.create') }}"
                     class="btn btn-add">
+
                     Tambah Produk
+
                 </a>
 
             @endcan
@@ -347,6 +364,12 @@
                         {{-- NAMA --}}
                         <div class="product-name">
                             {{ $product->nama }}
+                        </div>
+
+
+                        {{-- DESKRIPSI --}}
+                        <div class="product-description">
+                            {{ $product->deskripsi ?? 'Belum ada deskripsi produk.' }}
                         </div>
 
 

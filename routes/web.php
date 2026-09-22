@@ -7,6 +7,9 @@ use App\Http\Controllers\ItemPenjualanController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomCakeController;
+use App\Http\Controllers\CustomCakeAdminController;
+use App\Http\Controllers\KartuUcapanController;
 
 
 // Route yang bisa diakses ketika user belum login
@@ -18,6 +21,21 @@ Route::middleware('guest')->group(function () {
 
 // Route yang bisa diakses ketika user sudah login
 Route::middleware('auth')->group(function () {
+
+    Route::get('/kartu-ucapan', [KartuUcapanController::class, 'create'])
+    ->name('kartu-ucapan.create');
+
+    Route::post('/kartu-ucapan', [KartuUcapanController::class, 'store'])
+    ->name('kartu-ucapan.store');
+
+    Route::get('/admin/custom-cake', [CustomCakeAdminController::class, 'index'])
+    ->name('custom-cake.index');
+
+    Route::get('/custom-cake', [CustomCakeController::class, 'create'])
+    ->name('custom-cake.create');
+
+    Route::post('/custom-cake', [CustomCakeController::class, 'store'])
+        ->name('custom-cake.store');
 
     // Beranda
     Route::get('/beranda', [DashboardController::class, 'index'])

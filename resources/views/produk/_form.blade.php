@@ -5,6 +5,7 @@
     {{-- FORM --}}
     <div class="col-lg-8">
 
+        {{-- Foto Produk --}}
         <div class="mb-3">
             <label class="form-label fw-semibold">
                 Foto Produk
@@ -23,6 +24,7 @@
             @enderror
         </div>
 
+        {{-- Nama Produk --}}
         <div class="mb-3">
             <label class="form-label fw-semibold">
                 Nama Produk
@@ -42,6 +44,30 @@
             @enderror
         </div>
 
+        {{-- Deskripsi Produk --}}
+        <div class="mb-3">
+            <label class="form-label fw-semibold">
+                📝 Deskripsi Produk
+            </label>
+
+            <textarea
+                name="deskripsi"
+                class="form-control @error('deskripsi') is-invalid @enderror"
+                rows="4"
+                placeholder="Contoh: Cake lembut dengan krim cokelat yang creamy dan rasa manis yang pas.">{{ old('deskripsi', $produk->deskripsi ?? '') }}</textarea>
+
+            @error('deskripsi')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+
+            <small class="text-muted">
+                Jelaskan rasa, bahan, tekstur, atau keunikan produk.
+            </small>
+        </div>
+
+        {{-- Harga --}}
         <div class="row">
 
             <div class="col-md-6 mb-3">
@@ -102,6 +128,7 @@
 
         </div>
 
+        {{-- Stok --}}
         <div class="mb-4">
 
             <label class="form-label fw-semibold">
@@ -124,7 +151,7 @@
         </div>
 
         <button class="btn btn-primary px-4">
-             Simpan
+            Simpan
         </button>
 
         <a href="{{ route('produk.index') }}"
@@ -183,20 +210,20 @@
 <script>
 function previewImage(input){
 
-    const file=input.files[0];
+    const file = input.files[0];
 
-    const preview=document.getElementById('preview');
+    const preview = document.getElementById('preview');
 
-    const placeholder=document.getElementById('placeholder');
+    const placeholder = document.getElementById('placeholder');
 
     if(file){
 
-        preview.src=URL.createObjectURL(file);
+        preview.src = URL.createObjectURL(file);
 
-        preview.style.display='block';
+        preview.style.display = 'block';
 
         if(placeholder){
-            placeholder.style.display='none';
+            placeholder.style.display = 'none';
         }
 
     }

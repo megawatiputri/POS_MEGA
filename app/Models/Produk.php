@@ -12,12 +12,13 @@ class Produk extends Model
     protected $table = 'produk';
     
     protected $fillable = [
-        'user_id',
-        'foto',
-        'nama',
-        'harga_beli',
-        'harga_jual',
-        'stok',
+    'user_id',
+    'foto',
+    'nama',
+    'deskripsi',
+    'harga_beli',
+    'harga_jual',
+    'stok',
     ];
 
     public function user ()
